@@ -19,32 +19,4 @@ def load_feature_matrix(filepath):
     Returns:
     np.ndarray: Feature matrix.
     """
-    # Load CSV and treat "-" as missing values
-    df = pd.read_csv(filepath, na_values="-")
-
-    # Parse datetime
-    df["datetime"] = pd.to_datetime(
-        df[["Year", "Month", "Day"]].astype(str).agg("-".join, axis=1) + " " + df["Time [Local time]"],
-        errors="coerce"
-    )
-
-    # Extract features
-    feature_df = pd.DataFrame({
-        "year": df["datetime"].dt.year,
-        "month": df["datetime"].dt.month,
-        "day": df["datetime"].dt.day,
-        "hour": df["datetime"].dt.hour,
-        "minute": df["datetime"].dt.minute,
-        "min_temperature": pd.to_numeric(df["Minimum temperature [°C]"], errors="coerce"),
-        "max_temperature": pd.to_numeric(df["Maximum temperature [°C]"], errors="coerce")
-    })
-
-    # Replace NaNs with 0 and convert to numpy array
-    feature_array = feature_df.fillna(0).to_numpy()
-
-    return feature_array
-
-if __name__ == "__main__":
-    filepath = "../data/assignment_1.csv"
-    features = load_feature_matrix(filepath)
-    print(features)
+    #### Your solution has to be placed here. 
